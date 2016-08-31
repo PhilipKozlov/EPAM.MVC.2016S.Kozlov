@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomConstraints;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,9 @@ namespace ASP.NET.Day1
         public static void RegisterRoutes(RouteCollection routes)
         {
             var defaultNamespace = "ASP.NET.Day1.Controllers";
+            var compoundConstraint = new CompoundRouteConstraint(new IRouteConstraint[] { new MinLengthRouteConstraint(3), new AlphaRouteConstraint() });
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
                 name: "Json",
@@ -32,7 +35,7 @@ namespace ASP.NET.Day1
             );
 
             routes.MapRoute(
-                name: "Custom1",
+                name: "CustomSection1",
                 url: "{controller}/{action}/{type}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional},
                 constraints: new { type = "json" },
@@ -40,11 +43,27 @@ namespace ASP.NET.Day1
             );
 
             routes.MapRoute(
-                name: "Custom2",
+                name: "CustomSection2",
                 url: "{controller}/{action}/{type}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 constraints: new { type = "view" },
                 namespaces: new[] { "Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Compound",
+                url: "{controller}/{action}/{name}/{lastName}",
+                defaults: new { controller = "Hello", action = "Index"},
+                constraints: new { name = compoundConstraint, lastName = compoundConstraint },
+                namespaces: new[] { defaultNamespace }
+            );
+
+            routes.MapRoute(
+                name: "CustomConstraint",
+                url: "{controller}/{action}/{id}/{language}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                constraints: new { language = new LanguageConstraint("en-US") },
+                namespaces: new[] { defaultNamespace }
             );
 
             routes.MapRoute(
@@ -60,6 +79,7 @@ namespace ASP.NET.Day1
                 defaults: new { controller = "Home", action = "Index" },
                 namespaces: new [] { defaultNamespace }
             );
+
         }
     }
 }
