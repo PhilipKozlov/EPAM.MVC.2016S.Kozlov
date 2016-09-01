@@ -24,7 +24,7 @@ namespace CustomConstraints
         #region Public Methods
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
-            return httpContext.Request.UserLanguages.Contains(language);
+            return httpContext.Request.UserLanguages.Where(ul => ul.Contains(language)).Count() > 0;
         }
         #endregion
     }

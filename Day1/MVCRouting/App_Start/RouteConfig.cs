@@ -16,7 +16,6 @@ namespace ASP.NET.Day1
             var defaultNamespace = "ASP.NET.Day1.Controllers";
             var compoundConstraint = new CompoundRouteConstraint(new IRouteConstraint[] { new MinLengthRouteConstraint(3), new AlphaRouteConstraint() });
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
                 name: "Json",
@@ -60,10 +59,10 @@ namespace ASP.NET.Day1
 
             routes.MapRoute(
                 name: "CustomConstraint",
-                url: "{controller}/{action}/{id}/{language}",
+                url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                constraints: new { language = new LanguageConstraint("en-US") },
-                namespaces: new[] { defaultNamespace }
+                constraints: new { language = new LanguageConstraint("ru") },
+                namespaces: new[] { "JsonControllers" }
             );
 
             routes.MapRoute(

@@ -9,12 +9,19 @@ namespace MVCRouting.Controllers
     public class HelloController : Controller
     {
         // GET: Hello
-        [Route("greetings/{name}/{lastName}")]
         public ActionResult Index(string name, string lastName)
         {
             ViewBag.name = name;
             ViewBag.lastName = lastName;
             return View();
+        }
+
+        [Route("greetings/{name}-{lastName}")]
+        public ActionResult Hello(string name, string lastName)
+        {
+            ViewBag.name = name;
+            ViewBag.lastName = lastName;
+            return View("Index");
         }
     }
 }
