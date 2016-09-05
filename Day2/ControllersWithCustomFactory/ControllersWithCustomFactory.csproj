@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{08167644-6E47-4120-9EA1-FE02517767B0}</ProjectGuid>
+    <ProjectGuid>{348BEA4D-36FF-42B0-8285-54586FD51B4F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Controllers</RootNamespace>
-    <AssemblyName>Controllers</AssemblyName>
+    <RootNamespace>ControllersWithCustomFactory</RootNamespace>
+    <AssemblyName>ControllersWithCustomFactory</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -146,6 +146,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CustomControllerFactory.cs" />
     <Compile Include="Infrastructure\CustomerRepository.cs" />
     <Compile Include="Infrastructure\LocalAttribute.cs" />
     <Compile Include="Models\Customer.cs" />

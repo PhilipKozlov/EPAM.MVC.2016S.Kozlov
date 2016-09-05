@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Controllers.Controllers
+namespace ControllersWithCustomFactory.Controllers
 {
     public class AdminController : BaseController
     {

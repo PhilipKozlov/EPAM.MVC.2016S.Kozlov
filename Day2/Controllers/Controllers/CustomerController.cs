@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Controllers.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerController : BaseController
     {
         private CustomerRepository repository;
 
@@ -18,10 +18,9 @@ namespace Controllers.Controllers
             this.repository = CustomerRepository.Instance;
         }
 
-        // GET: Customer
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("List");
         }
 
         [HttpGet]

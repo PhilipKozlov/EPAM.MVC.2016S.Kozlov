@@ -5,9 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.SessionState;
 
-namespace Controllers.Controllers
+namespace ControllersWithCustomFactory.Controllers
 {
-    [SessionState(SessionStateBehavior.Disabled)]
     public class HomeController : BaseController
     {
         // GET: Home

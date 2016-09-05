@@ -1,6 +1,5 @@
 ﻿using Controllers.Infrastructure;
 using Controllers.Models;
-using Day2.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,44 +7,46 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Controllers.Controllers
+namespace ControllersWithCustomFactory.Controllers
 {
-    public class AdminController : BaseController
+    public class CustomerController : BaseController
     {
         private CustomerRepository repository;
 
-        public AdminController()
+        public CustomerController()
         {
             this.repository = CustomerRepository.Instance;
         }
 
-        [Local]
         public ActionResult Index()
         {
-            return View(repository.List());
+            return RedirectToAction("List");
         }
 
-        [Local]
         [HttpGet]
         public ActionResult Add()
         {
             return View();
         }
 
-        [Local]
         [HttpPost]
         public async Task<ActionResult> Add(Customer customer)
         {
             await repository.Add(customer);
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
-        [Local]
-        public async Task<ActionResult> Remove(Customer customer)
+        [HttpGet]
+        public ActionResult List()
         {
-            await repository.Remove(customer);
-            return RedirectToAction("Index");
+            return View(repository.List());
         }
 
+        [HttpPost]
+        [ActionName("List")]
+        public JsonResult ListPost()
+        {
+            return Json(repository.List());
+        }
     }
 }
