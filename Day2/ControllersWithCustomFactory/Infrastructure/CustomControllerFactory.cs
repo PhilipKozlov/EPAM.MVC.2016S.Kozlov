@@ -19,6 +19,11 @@ namespace ControllersWithCustomFactory.Infrastructure
             }
             controllerName = char.ToUpper(controllerName[0]) + controllerName.Substring(1);
             var targetType = Type.GetType("ControllersWithCustomFactory.Controllers." + controllerName + "Controller");
+            if (targetType == null)
+            {
+                targetType = Type.GetType("ControllersWithCustomFactory.Controllers.HomeController");
+                requestContext.RouteData.Values["controller"] = "home";
+            }
             return targetType == null ? null : (IController)DependencyResolver.Current.GetService(targetType);
         }
 
