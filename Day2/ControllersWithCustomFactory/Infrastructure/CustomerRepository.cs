@@ -1,4 +1,4 @@
-﻿using Controllers.Models;
+﻿using ControllersWithCustomFactory.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Controllers.Infrastructure
+namespace ControllersWithCustomFactory.Infrastructure
 {
     public class CustomerRepository
     {
@@ -37,14 +37,19 @@ namespace Controllers.Infrastructure
             await Task.Run(() => customers.Add(customer));
         }
 
-        public async Task<bool> Remove(Customer customer)
+        public async Task<bool> Remove(string id)
         {
-            return await Task.Run(() => customers.Remove(customer));
+            return await Task.Run(() => customers.Remove(customers.Where(c => c.Id == id).SingleOrDefault()));
         }
 
-        public IList<Customer> List()
+        public IList<Customer> GetAll()
         {
             return customers;
+        }
+
+        public async Task<Customer> GetById(string id)
+        {
+            return await Task.Run(() =>customers.Where(c => c.Id == id).SingleOrDefault());
         }
         #endregion
     }

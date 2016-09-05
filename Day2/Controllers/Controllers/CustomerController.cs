@@ -1,5 +1,4 @@
-﻿using Controllers.Infrastructure;
-using Controllers.Models;
+﻿using Controllers.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,42 +10,39 @@ namespace Controllers.Controllers
 {
     public class CustomerController : BaseController
     {
-        private CustomerRepository repository;
-
-        public CustomerController()
-        {
-            this.repository = CustomerRepository.Instance;
-        }
-
         public ActionResult Index()
         {
-            return RedirectToAction("List");
+            return RedirectToAction("User-List");
         }
 
         [HttpGet]
+        [ActionName("Add-User")]
         public ActionResult Add()
         {
-            return View();
+            return View("Add");
         }
 
         [HttpPost]
+        [ActionName("Add-User")]
         public async Task<ActionResult> Add(Customer customer)
         {
-            await repository.Add(customer);
-            return RedirectToAction("List");
+            customer.Id = DateTime.Now.Millisecond.ToString();
+            await Repository.Add(customer);
+            return RedirectToAction("User-List");
         }
 
         [HttpGet]
+        [ActionName("User-List")]
         public ActionResult List()
         {
-            return View(repository.List());
+            return View("List", Repository.GetAll());
         }
 
         [HttpPost]
-        [ActionName("List")]
+        [ActionName("User-List")]
         public JsonResult ListPost()
         {
-            return Json(repository.List());
+            return Json(Repository.GetAll());
         }
     }
 }

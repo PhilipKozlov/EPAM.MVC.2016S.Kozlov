@@ -12,6 +12,7 @@ namespace Controllers
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            RouteTable.Routes.MapMvcAttributeRoutes();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

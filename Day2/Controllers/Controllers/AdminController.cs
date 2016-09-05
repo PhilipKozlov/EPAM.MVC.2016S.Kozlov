@@ -12,17 +12,10 @@ namespace Controllers.Controllers
 {
     public class AdminController : BaseController
     {
-        private CustomerRepository repository;
-
-        public AdminController()
-        {
-            this.repository = CustomerRepository.Instance;
-        }
-
         [Local]
         public ActionResult Index()
         {
-            return View(repository.List());
+            return View(Repository.GetAll());
         }
 
         [Local]
@@ -36,14 +29,31 @@ namespace Controllers.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(Customer customer)
         {
-            await repository.Add(customer);
+            customer.Id = DateTime.Now.Millisecond.ToString();
+            await Repository.Add(customer);
             return RedirectToAction("Index");
         }
 
         [Local]
-        public async Task<ActionResult> Remove(Customer customer)
+        public async Task<ActionResult> Remove(string id)
         {
-            await repository.Remove(customer);
+            await Repository.Remove(id);
+            return RedirectToAction("Index");
+        }
+
+        [Local]
+        [HttpGet]
+        public async Task<ActionResult> Edit(string id)
+        {
+            return View(await Repository.GetById(id));
+        }
+
+        [Local]
+        [HttpPost]
+        public async Task<ActionResult> Edit(Customer customer)
+        {
+            await Repository.Remove(customer.Id);
+            await Repository.Add(customer);
             return RedirectToAction("Index");
         }
 

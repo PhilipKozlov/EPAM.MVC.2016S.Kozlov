@@ -29,7 +29,8 @@
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Remove", new { customer = item })
+            @Html.ActionLink("Delete", "Remove", new { id = item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
         </td>
     </tr>
 }

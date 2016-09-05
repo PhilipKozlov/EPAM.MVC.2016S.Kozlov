@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Controllers")]
+[assembly: AssemblyTitle("ControllersWithCustomFactory")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EPAM Systems")]
-[assembly: AssemblyProduct("Controllers")]
-[assembly: AssemblyCopyright("Copyright © EPAM Systems 2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ControllersWithCustomFactory")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("08167644-6e47-4120-9ea1-fe02517767b0")]
+[assembly: Guid("48d274aa-4d25-46c2-9338-c2268f10e72f")]
 
 // Version information for an assembly consists of the following four values:
 //

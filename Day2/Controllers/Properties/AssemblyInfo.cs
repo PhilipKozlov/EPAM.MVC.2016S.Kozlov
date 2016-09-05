@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Controllers")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EPAM Systems")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Controllers")]
-[assembly: AssemblyCopyright("Copyright © EPAM Systems 2016")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("08167644-6e47-4120-9ea1-fe02517767b0")]
+[assembly: Guid("f878eb45-5462-48d8-9bda-2f1ff8768c82")]
 
 // Version information for an assembly consists of the following four values:
 //
