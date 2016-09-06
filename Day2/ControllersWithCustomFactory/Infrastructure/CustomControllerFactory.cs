@@ -10,17 +10,27 @@ namespace ControllersWithCustomFactory.Infrastructure
         public IController CreateController(RequestContext requestContext, string controllerName)
         {
             var defaultNamespace = "ControllersWithCustomFactory.Controllers";
-            if (controllerName == "user")
+            var defaultControllerType = Type.GetType($"{defaultNamespace}.HomeController");
+            if (controllerName.ToLower() == "user")
             {
                 controllerName = "customer";
                 requestContext.RouteData.Values["controller"] = controllerName;
             }
+            // return default controller, if request for AdminController isn't local
+            else if (controllerName.ToLower() == "admin")
+            {
+                if (!requestContext.HttpContext.Request.IsLocal)
+                {
+                    requestContext.RouteData.Values["controller"] = "home";
+                    return (IController)DependencyResolver.Current.GetService(defaultControllerType);
+                }
+            }
 
-            var cntrollerFullName = char.ToUpper(controllerName[0]) + controllerName.Substring(1) + "Controller";
-            var targetType = Type.GetType($"{defaultNamespace}.{cntrollerFullName}");
+            var controllerFullName = char.ToUpper(controllerName[0]) + controllerName.Substring(1) + "Controller";
+            var targetType = Type.GetType($"{defaultNamespace}.{controllerFullName}");
             if (targetType == null)
             {
-                targetType = Type.GetType($"{defaultNamespace}.HomeController");
+                targetType = defaultControllerType;
                 requestContext.RouteData.Values["controller"] = "home";
             }
 

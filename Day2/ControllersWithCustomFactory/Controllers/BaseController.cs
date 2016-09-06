@@ -8,7 +8,6 @@ namespace ControllersWithCustomFactory.Controllers
         public BaseController()
         {
             this.Repository = CustomerRepository.Instance;
-            //this.ActionInvoker = new CustomActionInvoker();
         }
 
         public CustomerRepository Repository { get; }

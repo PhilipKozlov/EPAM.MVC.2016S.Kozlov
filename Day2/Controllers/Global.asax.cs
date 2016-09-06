@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Controllers.Infrastructure;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -14,6 +11,7 @@ namespace Controllers
             AreaRegistration.RegisterAllAreas();
             RouteTable.Routes.MapMvcAttributeRoutes();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
         }
     }
 }
