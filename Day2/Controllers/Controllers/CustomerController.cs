@@ -1,9 +1,6 @@
 ﻿using Controllers.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Controllers.Controllers
@@ -27,7 +24,7 @@ namespace Controllers.Controllers
         public async Task<ActionResult> Add(Customer customer)
         {
             customer.Id = DateTime.Now.Millisecond.ToString();
-            await Repository.Add(customer);
+            await this.Repository.Add(customer);
             return RedirectToAction("User-List");
         }
 
@@ -35,14 +32,14 @@ namespace Controllers.Controllers
         [ActionName("User-List")]
         public ActionResult List()
         {
-            return View("List", Repository.GetAll());
+            return View("List", this.Repository.GetAll());
         }
 
         [HttpPost]
         [ActionName("User-List")]
         public JsonResult ListPost()
         {
-            return Json(Repository.GetAll());
+            return Json(this.Repository.GetAll());
         }
     }
 }
