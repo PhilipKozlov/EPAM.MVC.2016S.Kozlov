@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.SessionState;
@@ -12,18 +9,21 @@ namespace ControllersWithCustomFactory.Infrastructure
     {
         public IController CreateController(RequestContext requestContext, string controllerName)
         {
+            var defaultNamespace = "ControllersWithCustomFactory.Controllers";
             if (controllerName == "user")
             {
                 controllerName = "customer";
                 requestContext.RouteData.Values["controller"] = controllerName;
             }
-            controllerName = char.ToUpper(controllerName[0]) + controllerName.Substring(1);
-            var targetType = Type.GetType("ControllersWithCustomFactory.Controllers." + controllerName + "Controller");
+
+            var cntrollerFullName = char.ToUpper(controllerName[0]) + controllerName.Substring(1) + "Controller";
+            var targetType = Type.GetType($"{defaultNamespace}.{cntrollerFullName}");
             if (targetType == null)
             {
-                targetType = Type.GetType("ControllersWithCustomFactory.Controllers.HomeController");
+                targetType = Type.GetType($"{defaultNamespace}.HomeController");
                 requestContext.RouteData.Values["controller"] = "home";
             }
+
             return targetType == null ? null : (IController)DependencyResolver.Current.GetService(targetType);
         }
 

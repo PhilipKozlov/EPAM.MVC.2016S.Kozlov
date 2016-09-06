@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ControllersWithCustomFactory.Models
+﻿namespace ControllersWithCustomFactory.Models
 {
     public class Customer
     {
