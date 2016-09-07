@@ -1,0 +1,59 @@
+﻿@model Views.Models.Person
+@{
+    ViewBag.Title = "Person";
+}
+
+@section scripts
+{
+    <script>
+        $(function () {
+            var $body = $('body');
+            var $navBar = $('.navbar');
+            var $header = $('.header');
+            var faction = '@Model.Faction';
+
+            if (faction == 'Dark') {
+                $navBar.addClass('navbar-inverse');
+                $header.addClass('header-dark');
+                $body.addClass('dark');
+            }
+            else {
+                $navBar.addClass('navbar');
+                $header.addClass('header-light');
+            }
+        });
+
+        function SwitchFactions(faction){
+            if (faction == "Dark"){
+                alert('LOL. There is no way out. PS your HR department has been contacted.');
+            }
+            else{
+                window.location.href = '@Url.Action("SwitchSides", "Person")';
+            }
+        }
+    </script>
+}
+
+@section navBar
+{
+    <div class="navbar navbar-fixed-top"></div>
+}
+
+@section header
+{
+    @Html.Partial("Header", @Model.Faction)
+}
+
+@section body
+{
+    <div class="container">
+        <h2><b>Name : </b>@Model.Name</h2>
+        <h2><b>Last name : </b>@Model.LastName</h2>
+    </div>
+}
+
+@section footer
+{
+    @Html.Action("Footer", "Person", new { faction = @Model.Faction })
+}
+
