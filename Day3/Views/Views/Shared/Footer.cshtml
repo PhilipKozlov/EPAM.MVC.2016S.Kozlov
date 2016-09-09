@@ -1,0 +1,15 @@
+﻿@model string
+@{
+    ViewBag.Title = "Footer";
+}
+
+<div class="container">
+    <h2>Joing other side?</h2>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input name="answer" type="submit" value="Yes" class="btn btn-default" onclick="SwitchFactions('@Model')" />
+            <input name="answer" type="submit" value="No" class="btn btn-default" onclick="" />
+        </div>
+    </div>
+</div>
+
