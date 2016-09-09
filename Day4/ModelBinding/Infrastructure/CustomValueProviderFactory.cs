@@ -12,8 +12,8 @@ namespace ModelBinding.Infrastructure
         public override IValueProvider GetValueProvider(ControllerContext controllerContext)
         {
             var provider = ConfigurationManager.AppSettings["ValueProvider"];
-            //var type = DependencyResolver.Current.GetService(targetType);
-            return Activator.CreateInstance(Type.GetType(provider)) as IValueProvider;
+            var targetType = Type.GetType(provider);
+            return (IValueProvider)Activator.CreateInstance(targetType, controllerContext);
         }
     }
 }

@@ -15,7 +15,8 @@ namespace ModelBinding
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            ValueProviderFactories.Factories.Insert(0, new CustomValueProviderFactory());
+            ValueProviderFactories.Factories.Clear();
+            ValueProviderFactories.Factories.Add(new CustomValueProviderFactory());
             ModelBinders.Binders.Add(typeof(Person), new PersonModelBinder());
         }
     }

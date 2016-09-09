@@ -138,6 +138,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CustomFormValueProvider.cs" />
+    <Compile Include="Infrastructure\CustomQueryStringValueProvider.cs" />
+    <Compile Include="Infrastructure\CustomValueProvider.cs" />
     <Compile Include="Infrastructure\CustomValueProviderFactory.cs" />
     <Compile Include="Infrastructure\PersonModelBinder.cs" />
     <Compile Include="Models\Address.cs" />
@@ -148,9 +151,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

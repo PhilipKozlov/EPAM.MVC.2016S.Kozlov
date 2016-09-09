@@ -4,75 +4,79 @@
     ViewBag.Title = "Index";
 }
 
-<h1>Create Person</h1>
-
-@using (Html.BeginForm())
-{
-    <h3>Address</h3>
-
+@using (Html.BeginForm((string)ViewBag.Action, "Home", (FormMethod)ViewBag.Method))
+{ 
     <div class="form-horizontal">
+
+        <h3>Personal info</h3>
+
         <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">First Name:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { @class = "form-control" })
+                <input type="text" name="FirstName" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Last Name:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { @class = "form-control" })
-               </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DoB, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DoB, new { @class = "form-control" })
+                <input type="text" name="LastName" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Role, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Date of birth:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Role, new { @class = "form-control" })
+                <input type="text" name="DoB" class="form-control" placeholder="ddmmyyyy" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Role:</label>
+            <div class="col-md-10">
+                <select name="Role" class="form-control">
+                    <option></option>
+                    <option>Admin</option>
+                    <option>User</option>
+                    <option>Guest</option>
+                </select>
             </div>
         </div>
 
         <h3>Address</h3>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HomeAddress.Line1, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Line 1:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeAddress.Line1, new { @class = "form-control" })
+                <input type="text" name="Line1" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HomeAddress.Line2, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Line 2:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeAddress.Line2, new { @class = "form-control" })
+                <input type="text" name="Line2" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HomeAddress.City, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">City:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeAddress.City, new { @class = "form-control" })
+                <input type="text" name="City" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HomeAddress.PostalCode, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Postal code:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeAddress.PostalCode, new { @class = "form-control" })
+                <input type="text" name="PostalCode" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HomeAddress.Country, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Country:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeAddress.Country, new { @class = "form-control" })
+                <input type="text" name="Country" class="form-control" />
             </div>
         </div>
 

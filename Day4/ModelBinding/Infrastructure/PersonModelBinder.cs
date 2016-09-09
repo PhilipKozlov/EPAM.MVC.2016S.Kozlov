@@ -12,17 +12,16 @@ namespace ModelBinding.Infrastructure
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var model = (Person)bindingContext.Model ?? new Person();
-            model.FirstName = GetValue(bindingContext, "FirstName");
-            model.LastName = GetValue(bindingContext, "FirstName");
-            // TODO: implement custom date time format
-            model.DoB = DateTime.Parse(GetValue(bindingContext, "DoB"));
-            model.Role = (Role)Enum.Parse(typeof(Role), GetRoleValue(bindingContext, "Role", controllerContext.RequestContext.HttpContext.Request.IsLocal), true);
-            model.HomeAddress.Line1 = GetAddressValue(bindingContext, "HomeAddress.Line1");
-            model.HomeAddress.Line2 = GetAddressValue(bindingContext, "HomeAddress.Line2");
-            model.HomeAddress.City = GetValue(bindingContext, "HomeAddress.City");
-            model.HomeAddress.Country = GetValue(bindingContext, "HomeAddress.Country");
-            model.HomeAddress.PostalCode = GetPostalValue(bindingContext, "HomeAddress.PostalCode");
-            model.HomeAddress.AddressSummary = GetAddressSummaryValue(model);
+            model.FirstName = this.GetValue(bindingContext, "FirstName");
+            model.LastName = this.GetValue(bindingContext, "LastName");
+            model.DoB = this.GetDoBValue(bindingContext, "DoB");
+            model.Role = (Role)Enum.Parse(typeof(Role), this.GetRoleValue(bindingContext, "Role", controllerContext.RequestContext.HttpContext.Request.IsLocal), true);
+            model.HomeAddress.Line1 = this.GetAddressValue(bindingContext, "Line1");
+            model.HomeAddress.Line2 = this.GetAddressValue(bindingContext, "Line2");
+            model.HomeAddress.City = this.GetValue(bindingContext, "City");
+            model.HomeAddress.Country = this.GetValue(bindingContext, "Country");
+            model.HomeAddress.PostalCode = this.GetPostalValue(bindingContext, "PostalCode");
+            model.HomeAddress.AddressSummary = this.GetAddressSummaryValue(model);
             return model;
         }
 
@@ -39,47 +38,60 @@ namespace ModelBinding.Infrastructure
             }
         }
 
+        private DateTime GetDoBValue(ModelBindingContext context, string name)
+        {
+            DateTime dob;
+            var dobString = this.GetValue(context, name);
+            if (!DateTime.TryParse(dobString, out dob))
+            {
+                return dobString == "<Not defined>" ? DateTime.Now : ParseDateString(dobString);
+            }
+            else
+            {
+                return dob;
+            }
+        }
+
+        // uncommon data format: ddmmyyyy
+        private DateTime ParseDateString(string date)
+        {
+            DateTime result;
+            if (date.Length < 8 || date.Any(x => char.IsLetter(x)))
+            {
+                return DateTime.Now;
+            }
+
+            DateTime.TryParse($"{date.Substring(0, 2)}/{date.Substring(2, 2)}/{date.Substring(4, 4)}", out result);
+            return result;
+        }
+
         private string GetRoleValue(ModelBindingContext context, string role, bool isLocal)
         {
-            var result = context.ValueProvider.GetValue(role);
-            if (result == null || result.AttemptedValue == "")
+            var result = this.GetValue(context, role);
+            if (result == "<Not defined>")
             {
                 return "Guest";
             }
-            if (result.AttemptedValue == "Admin" && !isLocal)
+            if (result == "Admin" && !isLocal)
             {
                 return "User";
             }
             else
             {
-                return result.AttemptedValue;
+                return result;
             }
         }
 
         private string GetAddressValue(ModelBindingContext context, string addrLine)
         {
-            var result = context.ValueProvider.GetValue(addrLine);
-            if (result == null || result.AttemptedValue == "" || result.AttemptedValue == "PO Box")
-            {
-                return "<Not defined>";
-            }
-            else
-            {
-                return result.AttemptedValue;
-            }
+            var result = this.GetValue(context, addrLine);
+            return result == "PO Box" ? "<Not defined>" : result;
         }
 
         private string GetPostalValue(ModelBindingContext context, string addrLine)
         {
-            var result = context.ValueProvider.GetValue(addrLine);
-            if (result.AttemptedValue.Length < 6 || result == null || result.AttemptedValue == "")
-            {
-                return "<Not defined>";
-            }
-            else
-            {
-                return result.AttemptedValue;
-            }
+            var result = this.GetValue(context, addrLine);
+            return result.Length < 6 ? "<Not defined>" : result;
         }
 
         private string GetAddressSummaryValue(Person model)
@@ -88,6 +100,7 @@ namespace ModelBinding.Infrastructure
             {
                 return "No Personal Address";
             }
+
             return model.HomeAddress.PostalCode + " " + model.HomeAddress.City + "," + model.HomeAddress.Line1;
         }
     }
