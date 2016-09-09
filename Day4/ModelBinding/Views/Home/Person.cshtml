@@ -1,0 +1,19 @@
+﻿@model ModelBinding.Models.Person
+@{
+    ViewBag.Title = "Person";
+}
+
+<div class="container">
+    <h1>Person</h1>
+    <div class="row"><label>First Name:</label> @Html.DisplayFor(m => m.FirstName)</div>
+    <div class="row"><label>Last Name:</label> @Html.DisplayFor(m => m.LastName)</div>
+    <div class="row"><label>Date of birth:</label> @Html.DisplayFor(m => m.DoB)</div>
+    <div class="row"><label>Role:</label> @Html.DisplayFor(m => m.Role)</div>
+    <h2>Address</h2>
+    <div class="row"><label>Line 1:</label> @Html.DisplayFor(m => m.HomeAddress.Line1)</div>
+    <div class="row"><label>Line 1:</label> @Html.DisplayFor(m => m.HomeAddress.Line2)</div>
+    <div class="row"><label>City:</label> @Html.DisplayFor(m => m.HomeAddress.City)</div>
+    <div class="row"><label>Postal code:</label> @Html.DisplayFor(m => m.HomeAddress.PostalCode)</div>
+    <div class="row"><label>Country:</label> @Html.DisplayFor(m => m.HomeAddress.Country)</div>
+    <div class="row"><label>Address summary:</label> @Html.DisplayFor(m => m.HomeAddress.AddressSummary)</div>
+</div>
