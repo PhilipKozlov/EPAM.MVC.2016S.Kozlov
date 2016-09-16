@@ -65,6 +65,7 @@ namespace ModelBinding.Infrastructure
             return result;
         }
 
+        // gets role based on predefined logic
         private string GetRoleValue(ModelBindingContext context, string role, bool isLocal)
         {
             var result = this.GetValue(context, role);
