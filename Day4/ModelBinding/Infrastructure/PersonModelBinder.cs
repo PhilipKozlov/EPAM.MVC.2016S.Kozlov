@@ -38,6 +38,7 @@ namespace ModelBinding.Infrastructure
             }
         }
 
+        // gets date of birth value
         private DateTime GetDoBValue(ModelBindingContext context, string name)
         {
             DateTime dob;
