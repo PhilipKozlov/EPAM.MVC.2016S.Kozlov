@@ -38,6 +38,7 @@ namespace ModelBinding.Infrastructure
             }
         }
 
+        // gets date of birth value
         private DateTime GetDoBValue(ModelBindingContext context, string name)
         {
             DateTime dob;
@@ -64,7 +65,7 @@ namespace ModelBinding.Infrastructure
             return result;
         }
 
-        // gets role based on predefined logic
+
         private string GetRoleValue(ModelBindingContext context, string role, bool isLocal)
         {
             var result = this.GetValue(context, role);
