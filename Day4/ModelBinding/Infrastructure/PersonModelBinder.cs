@@ -52,7 +52,6 @@ namespace ModelBinding.Infrastructure
             }
         }
 
-        // uncommon data format: ddmmyyyy
         private DateTime ParseDateString(string date)
         {
             DateTime result;
