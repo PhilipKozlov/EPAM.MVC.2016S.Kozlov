@@ -53,6 +53,7 @@ namespace ModelBinding.Infrastructure
             }
         }
 
+        // ddmmyyyy
         private DateTime ParseDateString(string date)
         {
             DateTime result;
