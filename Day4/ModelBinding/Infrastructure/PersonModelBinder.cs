@@ -25,6 +25,15 @@ namespace ModelBinding.Infrastructure
             return model;
         }
 
+        private void Foo()
+        {
+        }
+
+        private int Bar()
+        {
+            return 0;
+        }
+
         private string GetValue(ModelBindingContext context, string name)
         {
             var result = context.ValueProvider.GetValue(name);
@@ -38,7 +47,6 @@ namespace ModelBinding.Infrastructure
             }
         }
 
-        // gets date of birth value
         private DateTime GetDoBValue(ModelBindingContext context, string name)
         {
             DateTime dob;
@@ -53,7 +61,6 @@ namespace ModelBinding.Infrastructure
             }
         }
 
-        // ddmmyyyy
         private DateTime ParseDateString(string date)
         {
             DateTime result;
@@ -66,7 +73,7 @@ namespace ModelBinding.Infrastructure
             return result;
         }
 
-
+        // added comment
         private string GetRoleValue(ModelBindingContext context, string role, bool isLocal)
         {
             var result = this.GetValue(context, role);
@@ -84,18 +91,21 @@ namespace ModelBinding.Infrastructure
             }
         }
 
+        // added comment
         private string GetAddressValue(ModelBindingContext context, string addrLine)
         {
             var result = this.GetValue(context, addrLine);
             return result == "PO Box" ? "<Not defined>" : result;
         }
 
+        // added comment
         private string GetPostalValue(ModelBindingContext context, string addrLine)
         {
             var result = this.GetValue(context, addrLine);
             return result.Length < 6 ? "<Not defined>" : result;
         }
 
+        // added comment
         private string GetAddressSummaryValue(Person model)
         {
             if (model.HomeAddress.Line1 == "<Not defined>")
